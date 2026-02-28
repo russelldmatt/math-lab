@@ -111,7 +111,8 @@ main {
   height: var(--unit);
   background: #f43f5e;
   border-radius: 2px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  /* no border to match no-border hundred minis */
+  border: none;
   flex-shrink: 0;
 }
 
@@ -129,7 +130,7 @@ main {
   height: var(--unit);
   background: #facc15;
   border-radius: 2px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 /* Ten block: vertical stack of 10 mini one-blocks */
@@ -147,12 +148,13 @@ main {
   height: var(--unit);
   background: #facc15;
   border-radius: 2px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 /* Hundred block: 10x10 grid of mini squares */
 .hundred-block {
   display: grid;
+  /* each track exactly one mini square; gap determines spacing */
   grid-template-columns: repeat(10, var(--unit));
   gap: var(--gap);
   padding: var(--gap);
@@ -161,6 +163,8 @@ main {
 }
 
 .hundred-block .mini {
+  /* make square itself a bit larger so that when gap is added it matches the
+     visual size of a yellow ten-mini block (unit+gap) */
   width: var(--unit);
   height: var(--unit);
   background: #22d3ee;
