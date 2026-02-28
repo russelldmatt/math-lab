@@ -110,9 +110,9 @@ function init() {
   // Set grid template
   const numACols = aGroups.reduce((sum, g) => sum + g.count, 0);
   const numBCols = bGroups.reduce((sum, g) => sum + g.count, 0);
-  // first column and first row reserved for labels
-  grid.style.gridTemplateColumns = `120px repeat(${numBCols}, min-content)`;
-  grid.style.gridTemplateRows = `120px repeat(${numACols}, min-content)`;
+  // first column/row for labels, use min-content so they shrink to actual blocks
+  grid.style.gridTemplateColumns = `min-content repeat(${numBCols}, min-content)`;
+  grid.style.gridTemplateRows = `min-content repeat(${numACols}, min-content)`;
 
   // Corner cell
   const corner = document.createElement('div');

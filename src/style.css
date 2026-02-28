@@ -55,7 +55,8 @@ main {
   justify-content: center;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
-  padding: 4px;
+  /* no default padding; individual cell types can add spacing if needed */
+  padding: 0;
   /* remove rigid minimums so cells shrink to content */
   min-height: 0;
   min-width: 0;
