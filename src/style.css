@@ -36,8 +36,8 @@ main {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
   padding: 4px;
-  min-height: 100px;
-  min-width: 100px;
+  min-height: calc(var(--unit) * 6);
+  min-width: calc(var(--unit) * 6);
 }
 
 .corner-cell {
@@ -77,12 +77,18 @@ main {
   align-items: center;
 }
 
+/* all blocks use this base size */
+:root {
+  --unit: 12px;
+  --gap: 2px;
+}
+
 /* One block */
 .one-block {
-  width: 24px;
-  height: 24px;
+  width: var(--unit);
+  height: var(--unit);
   background: #f43f5e;
-  border-radius: 4px;
+  border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
 }
@@ -90,15 +96,15 @@ main {
 /* Ten block: row of 10 mini one-blocks */
 .ten-block {
   display: flex;
-  gap: 2px;
-  padding: 2px;
+  gap: var(--gap);
+  padding: var(--gap);
   background: transparent;
   flex-shrink: 0;
 }
 
 .ten-block .mini {
-  width: 12px;
-  height: 12px;
+  width: var(--unit);
+  height: var(--unit);
   background: #facc15;
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -108,15 +114,15 @@ main {
 .ten-block-vertical {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 2px;
+  gap: var(--gap);
+  padding: var(--gap);
   background: transparent;
   flex-shrink: 0;
 }
 
 .ten-block-vertical .mini {
-  width: 12px;
-  height: 12px;
+  width: var(--unit);
+  height: var(--unit);
   background: #facc15;
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -125,16 +131,16 @@ main {
 /* Hundred block: 10x10 grid of mini squares */
 .hundred-block {
   display: grid;
-  grid-template-columns: repeat(10, 8px);
-  gap: 1px;
-  padding: 2px;
+  grid-template-columns: repeat(10, var(--unit));
+  gap: var(--gap);
+  padding: var(--gap);
   background: transparent;
   flex-shrink: 0;
 }
 
 .hundred-block .mini {
-  width: 8px;
-  height: 8px;
+  width: var(--unit);
+  height: var(--unit);
   background: #22d3ee;
   border-radius: 1px;
 }
