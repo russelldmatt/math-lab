@@ -1,6 +1,8 @@
 import './style.css';
 
 const viz = document.getElementById('viz')!;
+const aInput = document.getElementById('aInput') as HTMLInputElement;
+const bInput = document.getElementById('bInput') as HTMLInputElement;
 
 interface Group {
   type: 'ones' | 'tens';
@@ -95,8 +97,8 @@ function renderProductCell(aGroup: Group, bGroup: Group): HTMLElement {
 }
 
 function init() {
-  const a = 42;
-  const b = 35;
+  const a = parseInt(aInput.value) || 0;
+  const b = parseInt(bInput.value) || 0;
 
   const aGroups = decompose(a);
   const bGroups = decompose(b);
@@ -158,4 +160,13 @@ function init() {
   viz.appendChild(grid);
 }
 
+// wire up inputs
+function scheduleRender() {
+  // debounce? simple immediate
+  init();
+}
+aInput.addEventListener('input', scheduleRender);
+bInput.addEventListener('input', scheduleRender);
+
+// initial render
 init();
