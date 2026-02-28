@@ -1,60 +1,80 @@
 import './style.css';
 
-const aInput = document.getElementById('aInput') as HTMLInputElement;
-const bInput = document.getElementById('bInput') as HTMLInputElement;
 const viz = document.getElementById('viz')!;
-const summary = document.getElementById('summary')!;
 
-aInput.addEventListener('input', render);
-bInput.addEventListener('input', render);
-
-function decompose(n: number) {
-  const hundreds = Math.floor(n / 100);
-  const tens = Math.floor((n % 100) / 10);
-  const ones = n % 10;
-
-  const groups = [];
-  if (hundreds) groups.push({ label: 'hundreds', value: hundreds * 100 });
-  if (tens) groups.push({ label: 'tens', value: tens * 10 });
-  if (ones) groups.push({ label: 'ones', value: ones });
-
-  if (groups.length === 0) groups.push({ label: 'ones', value: 0 });
-
-  return groups;
+function makeOneBlock() {
+  const container = document.createElement('div');
+  container.className = 'block';
+  const block = document.createElement('div');
+  block.className = 'one-block';
+  const label = document.createElement('div');
+  label.className = 'block-label';
+  label.textContent = 'One (1) block';
+  container.appendChild(block);
+  container.appendChild(label);
+  return container;
 }
 
-function render() {
-  const a = parseInt(aInput.value) || 0;
-  const b = parseInt(bInput.value) || 0;
-
-  const aGroups = decompose(a);
-  const bGroups = decompose(b);
-
-  viz.innerHTML = '';
-  viz.style.gridTemplateColumns = `repeat(${bGroups.length}, 1fr)`;
-
-  let total = 0;
-
-  for (const aPart of aGroups) {
-    for (const bPart of bGroups) {
-      const product = aPart.value * bPart.value;
-      total += product;
-
-      const cell = document.createElement('div');
-      cell.className = `cell ${aPart.label}`;
-      cell.innerText = `${aPart.value} × ${bPart.value}
-= ${product}`;
-
-      viz.appendChild(cell);
-    }
+function makeTenBlock() {
+  const container = document.createElement('div');
+  container.className = 'block';
+  const ten = document.createElement('div');
+  ten.className = 'ten-block';
+  for (let i = 0; i < 10; i++) {
+    const mini = document.createElement('div');
+    mini.className = 'mini';
+    ten.appendChild(mini);
   }
-
-  summary.innerHTML = `
-    <div>
-      ${a} × ${b} =
-      <strong>${total}</strong>
-    </div>
-  `;
+  const label = document.createElement('div');
+  label.className = 'block-label';
+  label.textContent = 'Ten (10) block — horizontal';
+  container.appendChild(ten);
+  container.appendChild(label);
+  return container;
 }
 
-render();
+function makeVerticalTenBlock() {
+  const container = document.createElement('div');
+  container.className = 'block';
+  const ten = document.createElement('div');
+  ten.className = 'ten-block-vertical';
+  for (let i = 0; i < 10; i++) {
+    const mini = document.createElement('div');
+    mini.className = 'mini';
+    ten.appendChild(mini);
+  }
+  const label = document.createElement('div');
+  label.className = 'block-label';
+  label.textContent = 'Ten (10) block — vertical';
+  container.appendChild(ten);
+  container.appendChild(label);
+  return container;
+}
+
+function makeHundredBlock() {
+  const container = document.createElement('div');
+  container.className = 'block';
+  const hundred = document.createElement('div');
+  hundred.className = 'hundred-block';
+  for (let i = 0; i < 100; i++) {
+    const mini = document.createElement('div');
+    mini.className = 'mini';
+    hundred.appendChild(mini);
+  }
+  const label = document.createElement('div');
+  label.className = 'block-label';
+  label.textContent = 'One Hundred (100) block — 10×10';
+  container.appendChild(hundred);
+  container.appendChild(label);
+  return container;
+}
+
+function init() {
+  viz.innerHTML = '';
+  viz.appendChild(makeOneBlock());
+  viz.appendChild(makeTenBlock());
+  viz.appendChild(makeVerticalTenBlock());
+  viz.appendChild(makeHundredBlock());
+}
+
+init();

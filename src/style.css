@@ -1,63 +1,101 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: #0f172a;
+  background: #0b1220;
   color: white;
   padding: 20px;
 }
 
 h1 {
-  margin-bottom: 4px;
-}
-.subtitle {
-  color: #94a3b8;
-  margin-bottom: 20px;
+  margin: 0 0 12px 0;
+  font-size: 20px;
 }
 
-.controls {
+main {
+  margin-top: 20px;
+}
+
+.viz {
   display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
 }
 
-input {
-  width: 100px;
-  padding: 8px;
-  font-size: 16px;
-}
-
-.times {
-  font-size: 22px;
-}
-
-#viz {
-  display: grid;
-  gap: 2px;
-  margin-bottom: 20px;
-}
-
-.cell {
-  padding: 14px;
-  border: 1px solid #334155;
+.block-label {
+  font-size: 14px;
+  color: #cbd5e1;
   text-align: center;
-  font-weight: bold;
-  background: #1e293b;
 }
 
-.hundreds {
-  background: #22d3ee;
-  color: black;
-}
-.tens {
-  background: #facc15;
-  color: black;
-}
-.ones {
+/* One block */
+.one-block {
+  width: 48px;
+  height: 48px;
   background: #f43f5e;
-  color: white;
+  border-radius: 6px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
 }
 
-#summary {
-  font-size: 18px;
+/* Ten block: row of 10 mini one-blocks */
+.ten-block {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: transparent;
+}
+
+.ten-block .mini {
+  width: 28px;
+  height: 28px;
+  background: #facc15;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Ten block: vertical stack of 10 mini one-blocks */
+.ten-block-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  background: transparent;
+}
+
+.ten-block-vertical .mini {
+  width: 28px;
+  height: 28px;
+  background: #facc15;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Hundred block: 10x10 grid of mini squares */
+.hundred-block {
+  display: grid;
+  grid-template-columns: repeat(10, 12px);
+  gap: 3px;
+  padding: 6px;
+  background: transparent;
+}
+
+.hundred-block .mini {
+  width: 12px;
+  height: 12px;
+  background: #22d3ee;
+  border-radius: 2px;
+}
+
+@media (max-width: 520px) {
+  .viz {
+    flex-direction: column;
+    gap: 18px;
+  }
 }
