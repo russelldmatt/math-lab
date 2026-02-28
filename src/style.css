@@ -6,6 +6,19 @@ body {
   padding: 20px;
 }
 
+/* make navigation links bright enough on dark background */
+a {
+  color: #60a5fa;
+  text-decoration: none;
+}
+a:visited {
+  color: #a78bfa;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
 h1 {
   margin: 0 0 12px 0;
   font-size: 20px;
