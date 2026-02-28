@@ -36,8 +36,9 @@ main {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
   padding: 4px;
-  min-height: calc(var(--unit) * 6);
-  min-width: calc(var(--unit) * 6);
+  /* remove rigid minimums so cells shrink to content */
+  min-height: 0;
+  min-width: 0;
 }
 
 .corner-cell {

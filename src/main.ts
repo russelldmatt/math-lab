@@ -108,8 +108,9 @@ function init() {
   // Set grid template
   const numACols = aGroups.reduce((sum, g) => sum + g.count, 0);
   const numBCols = bGroups.reduce((sum, g) => sum + g.count, 0);
-  grid.style.gridTemplateColumns = `120px repeat(${numBCols}, 1fr)`;
-  grid.style.gridTemplateRows = `120px repeat(${numACols}, 1fr)`;
+  // first column and first row reserved for labels
+  grid.style.gridTemplateColumns = `120px repeat(${numBCols}, min-content)`;
+  grid.style.gridTemplateRows = `120px repeat(${numACols}, min-content)`;
 
   // Corner cell
   const corner = document.createElement('div');
