@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiplication with Base-10 Blocks</title>
+  </head>
+  <body>
+    <header>
+      <h1>Multiplication with Base-10 Blocks</h1>
+      <p class="subtitle">
+        See how multiplication works using base-10 blocks and area!
+      </p>
+    </header>
+
+    <section class="controls">
+      <label>
+        A:
+        <input id="aInput" type="number" min="0" max="999" value="42" />
+      </label>
+
+      <span class="times">×</span>
+
+      <label>
+        B:
+        <input id="bInput" type="number" min="0" max="999" value="35" />
+      </label>
+    </section>
+
+    <main>
+      <div id="viz"></div>
+      <div id="summary"></div>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

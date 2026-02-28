@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 4px;
+}
+.subtitle {
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.times {
+  font-size: 22px;
+}
+
+#viz {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.cell {
+  padding: 14px;
+  border: 1px solid #334155;
+  text-align: center;
+  font-weight: bold;
+  background: #1e293b;
+}
+
+.hundreds {
+  background: #22d3ee;
+  color: black;
+}
+.tens {
+  background: #facc15;
+  color: black;
+}
+.ones {
+  background: #f43f5e;
+  color: white;
+}
+
+#summary {
+  font-size: 18px;
+}
