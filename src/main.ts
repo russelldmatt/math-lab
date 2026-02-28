@@ -123,7 +123,7 @@ function init() {
   for (const bGroup of bGroups) {
     for (let i = 0; i < bGroup.count; i++) {
       const cell = document.createElement('div');
-      cell.className = 'grid-cell top-label';
+      cell.className = 'grid-cell top-label input-cell';
       if (bGroup.type === 'tens') {
         cell.appendChild(makeHorizontalTenBlock());
       } else {
@@ -138,7 +138,7 @@ function init() {
     for (let ai = 0; ai < aGroup.count; ai++) {
       // Left label
       const leftCell = document.createElement('div');
-      leftCell.className = 'grid-cell left-label';
+      leftCell.className = 'grid-cell left-label input-cell';
       if (aGroup.type === 'tens') {
         leftCell.appendChild(makeVerticalTenBlock());
       } else {
