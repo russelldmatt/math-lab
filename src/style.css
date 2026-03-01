@@ -131,6 +131,29 @@ main {
   align-items: center;
 }
 
+.long-mult {
+  display: flex;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.long-mult-expanded,
+.long-mult-traditional {
+  flex: 1;
+}
+
+.long-mult h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+.long-mult pre {
+  margin: 0;
+  font-family: monospace;
+  line-height: 1.2;
+}
+
 /* all blocks use this base size */
 :root {
   --unit: 12px;
