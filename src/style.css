@@ -217,7 +217,8 @@ main {
 .long-mult pre {
   margin: 0;
   font-family: monospace;
-  line-height: 1.2;
+  font-size: 1.8rem;
+  line-height: 1.3;
 }
 
 /* all blocks use this base size */
