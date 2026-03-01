@@ -46,9 +46,7 @@ describe('renderExpandedLongMultiplication', () => {
         '× 27\n' +
         '----\n' +
         '  49  ← 7 × 7\n' +
-        '   0  ← 7 × 0\n' +
         ' 140  ← 20 × 7\n' +
-        '   0  ← 20 × 0\n' +
         '----\n' +
         ' 189'
     );
@@ -58,15 +56,15 @@ describe('renderExpandedLongMultiplication', () => {
     const result = renderExpandedLongMultiplication(7, 6);
     console.log('\nExpanded form output (7 x 6):\n' + result + '\n');
     expect(result).toBe(
-      '  7\n' +
-        '× 6\n' +
-        '---\n' +
-        ' 42  ← 6 × 7\n' +
-        '  0  ← 6 × 0\n' +
-        '  0  ← 0 × 7\n' +
-        '  0  ← 0 × 0\n' +
-        '---\n' +
-        ' 42'
+      '  7\n' + '× 6\n' + '---\n' + ' 42  ← 6 × 7\n' + '---\n' + ' 42'
+    );
+  });
+
+  it('shows one term for 5 x 8', () => {
+    const result = renderExpandedLongMultiplication(5, 8);
+    console.log('\nExpanded form output (5 x 8):\n' + result + '\n');
+    expect(result).toBe(
+      '  5\n' + '× 8\n' + '---\n' + ' 40  ← 8 × 5\n' + '---\n' + ' 40'
     );
   });
 });
