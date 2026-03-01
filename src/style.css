@@ -54,6 +54,66 @@ main {
   gap: 16px;
 }
 
+.area-model-wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  row-gap: 8px;
+  align-items: stretch;
+  justify-content: start;
+}
+
+.axis-top {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  gap: 4px;
+}
+
+.axis-top-text,
+.axis-left-text {
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.2px;
+}
+
+.axis-top-bracket {
+  width: 100%;
+  height: 8px;
+  border-top: 2px solid #94a3b8;
+  border-left: 2px solid #94a3b8;
+  border-right: 2px solid #94a3b8;
+  border-radius: 6px 6px 0 0;
+  box-sizing: border-box;
+}
+
+.axis-left {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.axis-left-bracket {
+  align-self: stretch;
+  width: 10px;
+  border-left: 2px solid #94a3b8;
+  border-top: 2px solid #94a3b8;
+  border-bottom: 2px solid #94a3b8;
+  border-radius: 6px 0 0 6px;
+  box-sizing: border-box;
+}
+
+.mult-grid {
+  grid-column: 2;
+  grid-row: 2;
+}
+
 /* multiplication grid layout */
 .mult-grid {
   display: grid;

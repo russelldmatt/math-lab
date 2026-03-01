@@ -169,8 +169,30 @@ export function renderGrid(
     }
   }
 
+  // Wrap grid with axis labels so it's clear the whole top is B and the whole left is A
+  const wrapper = document.createElement('div');
+  wrapper.className = 'area-model-wrapper';
+
+  const topAxis = document.createElement('div');
+  topAxis.className = 'axis-top';
+  topAxis.innerHTML = `
+    <div class="axis-top-text">${b}</div>
+    <div class="axis-top-bracket" aria-hidden="true"></div>
+  `;
+
+  const leftAxis = document.createElement('div');
+  leftAxis.className = 'axis-left';
+  leftAxis.innerHTML = `
+    <div class="axis-left-text">${a}</div>
+    <div class="axis-left-bracket" aria-hidden="true"></div>
+  `;
+
+  wrapper.appendChild(topAxis);
+  wrapper.appendChild(leftAxis);
+  wrapper.appendChild(grid);
+
   target.innerHTML = '';
-  target.appendChild(grid);
+  target.appendChild(wrapper);
 }
 
 function init() {
