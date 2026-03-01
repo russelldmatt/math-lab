@@ -21,7 +21,59 @@
         other, multiply by the ones digit first, then by the tens digit, and add
         the partial products together.
       </p>
-      <!-- you can expand this section with examples or interactive steps -->
+
+      <h2>Area‑model example</h2>
+      <div id="exampleArea" class="viz"></div>
+
+      <h2>Long‑multiplication layout</h2>
+      <div id="exampleLong" class="long-mult"></div>
+
+      <!-- load the blocks rendering logic so it registers on window -->
+      <script type="module" src="/src/main.ts"></script>
+
+      <script type="module">
+        // this script just uses the global exposed by main.ts; no import
+        const debug = document.createElement('div');
+        debug.id = 'debug';
+        document.body.appendChild(debug);
+        debug.textContent = 'hand.html script running';
+
+        if (window.renderGrid) {
+          const area = document.getElementById('exampleArea');
+          if (area) {
+            window.renderGrid(27, 65, area);
+            debug.textContent += ' – area rendered';
+          } else {
+            debug.textContent += ' – missing exampleArea';
+          }
+
+          const long = document.getElementById('exampleLong');
+          if (long) {
+            long.innerHTML = `
+<pre style="font-family: monospace; line-height:1.2;">
+   27
+ × 65
+ ----
+   135   ← 27×5 (ones)
+  1620   ← 27×6 (tens, shifted left)
+ ----
+  1755
+</pre>
+`;
+          } else {
+            debug.textContent += ' – missing exampleLong';
+          }
+        } else {
+          debug.textContent += ' – window.renderGrid not defined';
+        }
+      </script>
+
+      <p>
+        The two partial products above correspond to the coloured rectangles in
+        the area model: the yellow row at the top matches the 27×5 block, and
+        the blue row below matches the 27×6 block, which has been moved one
+        place to the left because it represents tens.
+      </p>
     </main>
   </body>
 </html>

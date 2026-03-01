@@ -96,10 +96,20 @@ function renderProductCell(aGroup: Group, bGroup: Group): HTMLElement {
   return cell;
 }
 
-function init() {
-  const a = parseInt(aInput.value) || 0;
-  const b = parseInt(bInput.value) || 0;
+// core rendering logic factored out so it can be reused on other pages
+export interface RenderGridOptions {
+  /**
+   * called for each product cell after it's created; return class or mutate directly
+   */
+  highlight?: (aGroup: Group, bGroup: Group, cell: HTMLElement) => void;
+}
 
+export function renderGrid(
+  a: number,
+  b: number,
+  target: HTMLElement,
+  options: RenderGridOptions = {}
+): void {
   const aGroups = decompose(a);
   const bGroups = decompose(b);
 
@@ -150,15 +160,33 @@ function init() {
       for (const bGroup of bGroups) {
         for (let bi = 0; bi < bGroup.count; bi++) {
           const productCell = renderProductCell(aGroup, bGroup);
+          if (options.highlight) {
+            options.highlight(aGroup, bGroup, productCell);
+          }
           grid.appendChild(productCell);
         }
       }
     }
   }
 
-  viz.innerHTML = '';
-  viz.appendChild(grid);
+  target.innerHTML = '';
+  target.appendChild(grid);
 }
+
+function init() {
+  const a = parseInt(aInput.value) || 0;
+  const b = parseInt(bInput.value) || 0;
+  renderGrid(a, b, viz);
+}
+
+// expose to global so non-module pages can use it
+declare global {
+  interface Window {
+    renderGrid: typeof renderGrid;
+  }
+}
+
+window.renderGrid = renderGrid;
 
 // wire up inputs
 function scheduleRender() {

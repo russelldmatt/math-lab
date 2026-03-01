@@ -86,6 +86,17 @@ main {
   background: rgba(255, 255, 255, 0.2);
 }
 
+/* highlights for partial products on the explanation page */
+.highlight-ones {
+  /* corresponds to multiply-by-ones partial (e.g. 27×5 = 135) */
+  background: rgba(250, 205, 21, 0.3) !important;
+}
+
+.highlight-tens {
+  /* corresponds to multiply-by-tens partial (e.g. 27×60 = 1620) */
+  background: rgba(34, 211, 238, 0.3) !important;
+}
+
 /* helper class applied to the input row/column cells */
 .input-cell {
   /* background only – no border so the whole grid stays clean */
