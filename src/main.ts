@@ -193,6 +193,23 @@ export function renderGrid(
 
   target.innerHTML = '';
   target.appendChild(wrapper);
+
+  // Align brackets with the actual block area (exclude the empty top-left corner space)
+  requestAnimationFrame(() => {
+    const cornerRect = corner.getBoundingClientRect();
+    const gridStyles = getComputedStyle(grid);
+    const colGap = parseFloat(gridStyles.columnGap || '0') || 0;
+    const rowGap = parseFloat(gridStyles.rowGap || '0') || 0;
+
+    wrapper.style.setProperty(
+      '--axis-top-inset-left',
+      `${cornerRect.width + colGap}px`
+    );
+    wrapper.style.setProperty(
+      '--axis-left-inset-top',
+      `${cornerRect.height + rowGap}px`
+    );
+  });
 }
 
 function init() {

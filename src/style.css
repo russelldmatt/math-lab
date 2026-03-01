@@ -71,7 +71,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: end;
-  gap: 4px;
+  gap: 6px;
 }
 
 .axis-top-text,
@@ -79,16 +79,19 @@ main {
   font-weight: 700;
   color: #e2e8f0;
   letter-spacing: 0.2px;
+  line-height: 1;
 }
 
 .axis-top-bracket {
-  width: 100%;
+  width: calc(100% - var(--axis-top-inset-left, 0px));
   height: 8px;
   border-top: 2px solid #94a3b8;
   border-left: 2px solid #94a3b8;
   border-right: 2px solid #94a3b8;
   border-radius: 6px 6px 0 0;
   box-sizing: border-box;
+  margin-top: 2px;
+  margin-left: var(--axis-top-inset-left, 0px);
 }
 
 .axis-left {
@@ -96,17 +99,20 @@ main {
   grid-row: 2;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .axis-left-bracket {
   align-self: stretch;
   width: 10px;
+  height: calc(100% - var(--axis-left-inset-top, 0px));
   border-left: 2px solid #94a3b8;
   border-top: 2px solid #94a3b8;
   border-bottom: 2px solid #94a3b8;
   border-radius: 6px 0 0 6px;
   box-sizing: border-box;
+  margin-top: var(--axis-left-inset-top, 0px);
 }
 
 .mult-grid {
