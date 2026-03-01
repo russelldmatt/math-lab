@@ -173,6 +173,10 @@ export function renderGrid(
   const wrapper = document.createElement('div');
   wrapper.className = 'area-model-wrapper';
 
+  const caption = document.createElement('div');
+  caption.className = 'area-model-caption';
+  caption.textContent = `${a} rows of ${b}`;
+
   const topAxis = document.createElement('div');
   topAxis.className = 'axis-top';
   topAxis.innerHTML = `
@@ -187,6 +191,7 @@ export function renderGrid(
     <div class="axis-left-bracket" aria-hidden="true"></div>
   `;
 
+  wrapper.appendChild(caption);
   wrapper.appendChild(topAxis);
   wrapper.appendChild(leftAxis);
   wrapper.appendChild(grid);
