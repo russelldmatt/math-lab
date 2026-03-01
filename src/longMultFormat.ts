@@ -20,9 +20,9 @@ export function renderTraditionalLongMultiplication(a: number, b: number) {
   const bottomLine = '×' + pad(b, numWidth);
   const dashLine = '-'.repeat(numWidth + 1);
   const partial1Line =
-    ' ' + pad(partial1, numWidth) + `  ← ${a}×${bOnes} (ones)`;
+    ' ' + pad(partial1, numWidth) + `  ← ${a} × ${bOnes} (ones)`;
   const partial2Line =
-    ' ' + pad(partial2, numWidth) + `  ← ${a}×${bTens} (tens, shifted)`;
+    ' ' + pad(partial2, numWidth) + `  ← ${a} × ${bTens} (tens, shifted)`;
   const totalLine = ' ' + pad(a * b, numWidth);
 
   return [
@@ -60,10 +60,10 @@ export function renderExpandedLongMultiplication(a: number, b: number) {
   const topLine = ' ' + pad(a, numWidth);
   const bottomLine = '×' + pad(b, numWidth);
   const dashLine = '-'.repeat(numWidth + 1);
-  const p1Line = ' ' + pad(p1, numWidth) + '  ← ' + bOnes + '×' + aOnes;
-  const p2Line = ' ' + pad(p2, numWidth) + '  ← ' + bOnes + '×' + aTens;
-  const p3Line = ' ' + pad(p3, numWidth) + '  ← ' + bTens + '×' + aOnes;
-  const p4Line = ' ' + pad(p4, numWidth) + '  ← ' + bTens + '×' + aTens;
+  const p1Line = ' ' + pad(p1, numWidth) + '  ← ' + bOnes + ' × ' + aOnes;
+  const p2Line = ' ' + pad(p2, numWidth) + '  ← ' + bOnes + ' × ' + aTens;
+  const p3Line = ' ' + pad(p3, numWidth) + '  ← ' + bTens + ' × ' + aOnes;
+  const p4Line = ' ' + pad(p4, numWidth) + '  ← ' + bTens + ' × ' + aTens;
   const totalLine = ' ' + pad(a * b, numWidth);
 
   return [

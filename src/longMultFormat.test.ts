@@ -29,10 +29,10 @@ describe('renderExpandedLongMultiplication', () => {
       '   27\n' +
         '×  65\n' +
         '-----\n' +
-        '   35  ← 5×7\n' +
-        '  100  ← 5×20\n' +
-        '  420  ← 60×7\n' +
-        ' 1200  ← 60×20\n' +
+        '   35  ← 5 × 7\n' +
+        '  100  ← 5 × 20\n' +
+        '  420  ← 60 × 7\n' +
+        ' 1200  ← 60 × 20\n' +
         '-----\n' +
         ' 1755'
     );
@@ -45,10 +45,10 @@ describe('renderExpandedLongMultiplication', () => {
       '   7\n' +
         '× 27\n' +
         '----\n' +
-        '  49  ← 7×7\n' +
-        '   0  ← 7×0\n' +
-        ' 140  ← 20×7\n' +
-        '   0  ← 20×0\n' +
+        '  49  ← 7 × 7\n' +
+        '   0  ← 7 × 0\n' +
+        ' 140  ← 20 × 7\n' +
+        '   0  ← 20 × 0\n' +
         '----\n' +
         ' 189'
     );
@@ -61,10 +61,10 @@ describe('renderExpandedLongMultiplication', () => {
       '  7\n' +
         '× 6\n' +
         '---\n' +
-        ' 42  ← 6×7\n' +
-        '  0  ← 6×0\n' +
-        '  0  ← 0×7\n' +
-        '  0  ← 0×0\n' +
+        ' 42  ← 6 × 7\n' +
+        '  0  ← 6 × 0\n' +
+        '  0  ← 0 × 7\n' +
+        '  0  ← 0 × 0\n' +
         '---\n' +
         ' 42'
     );
@@ -80,8 +80,8 @@ describe('renderTraditionalLongMultiplication', () => {
       '   27\n' +
         '×  65\n' +
         '-----\n' +
-        '  135  ← 27×5 (ones)\n' +
-        ' 1620  ← 27×60 (tens, shifted)\n' +
+        '  135  ← 27 × 5 (ones)\n' +
+        ' 1620  ← 27 × 60 (tens, shifted)\n' +
         '-----\n' +
         ' 1755'
     );
@@ -94,8 +94,8 @@ describe('renderTraditionalLongMultiplication', () => {
       '   7\n' +
         '× 27\n' +
         '----\n' +
-        '  49  ← 7×7 (ones)\n' +
-        ' 140  ← 7×20 (tens, shifted)\n' +
+        '  49  ← 7 × 7 (ones)\n' +
+        ' 140  ← 7 × 20 (tens, shifted)\n' +
         '----\n' +
         ' 189'
     );
@@ -108,8 +108,8 @@ describe('renderTraditionalLongMultiplication', () => {
       '  7\n' +
         '× 6\n' +
         '---\n' +
-        ' 42  ← 7×6 (ones)\n' +
-        '  0  ← 7×0 (tens, shifted)\n' +
+        ' 42  ← 7 × 6 (ones)\n' +
+        '  0  ← 7 × 0 (tens, shifted)\n' +
         '---\n' +
         ' 42'
     );
