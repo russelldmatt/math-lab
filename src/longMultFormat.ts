@@ -60,10 +60,10 @@ export function renderExpandedLongMultiplication(a: number, b: number) {
   const topLine = ' ' + pad(a, numWidth);
   const bottomLine = '×' + pad(b, numWidth);
   const dashLine = '-'.repeat(numWidth + 1);
-  const p1Line = ' ' + pad(p1, numWidth) + '  ← ' + aOnes + '×' + bOnes;
-  const p2Line = ' ' + pad(p2, numWidth) + '  ← ' + aTens + '×' + bOnes;
-  const p3Line = ' ' + pad(p3, numWidth) + '  ← ' + aOnes + '×' + bTens;
-  const p4Line = ' ' + pad(p4, numWidth) + '  ← ' + aTens + '×' + bTens;
+  const p1Line = ' ' + pad(p1, numWidth) + '  ← ' + bOnes + '×' + aOnes;
+  const p2Line = ' ' + pad(p2, numWidth) + '  ← ' + bOnes + '×' + aTens;
+  const p3Line = ' ' + pad(p3, numWidth) + '  ← ' + bTens + '×' + aOnes;
+  const p4Line = ' ' + pad(p4, numWidth) + '  ← ' + bTens + '×' + aTens;
   const totalLine = ' ' + pad(a * b, numWidth);
 
   return [
