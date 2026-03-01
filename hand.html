@@ -14,6 +14,15 @@
       </nav>
       <h1>Long multiplication (standard algorithm)</h1>
     </header>
+
+    <section class="controls">
+      <label>
+        A: <input id="aInput" type="number" min="0" max="99" value="7" />
+      </label>
+      <label>
+        B: <input id="bInput" type="number" min="0" max="99" value="6" />
+      </label>
+    </section>
     <main>
       <p>
         Here you can explain how to multiply numbers by hand using the
@@ -31,63 +40,96 @@
         <div class="long-mult-traditional" id="exampleLongTraditional"></div>
       </div>
 
-      <!-- load the blocks rendering logic so it registers on window -->
       <script type="module" src="/src/main.ts"></script>
 
       <script type="module">
-        // this script just uses the global exposed by main.ts; no import
+        const aInput = document.getElementById('aInput');
+        const bInput = document.getElementById('bInput');
         const debug = document.createElement('div');
         debug.id = 'debug';
         document.body.appendChild(debug);
-        debug.textContent = 'hand.html script running';
 
-        if (window.renderGrid) {
-          const area = document.getElementById('exampleArea');
-          if (area) {
-            window.renderGrid(27, 65, area);
-            debug.textContent += ' – area rendered';
-          } else {
-            debug.textContent += ' – missing exampleArea';
+        function padNum(n, width = 4) {
+          return String(n).padStart(width, ' ');
+        }
+
+        function renderExamples() {
+          const a = parseInt(aInput.value) || 0;
+          const b = parseInt(bInput.value) || 0;
+
+          // decompose into tens and ones
+          const aTens = Math.floor(a / 10);
+          const aOnes = a % 10;
+          const bTens = Math.floor(b / 10);
+          const bOnes = b % 10;
+
+          // the 4 products
+          const p1 = aOnes * bOnes; // ones × ones
+          const p2 = aOnes * (bTens * 10); // ones × tens
+          const p3 = aTens * 10 * bOnes; // tens × ones
+          const p4 = aTens * 10 * (bTens * 10); // tens × tens
+          const total = a * b;
+
+          // partial products the traditional way
+          const partial1 = a * bOnes; // multiply by ones
+          const partial2 = a * (bTens * 10); // multiply by tens
+
+          // figure out the width we need for alignment based on the actual numbers
+          const maxWidth =
+            Math.max(
+              String(a).length,
+              String(b).length,
+              String(p1).length,
+              String(p2).length,
+              String(p3).length,
+              String(p4).length,
+              String(total).length,
+              String(partial1).length,
+              String(partial2).length
+            ) + 1;
+
+          if (window.renderGrid) {
+            const area = document.getElementById('exampleArea');
+            if (area) {
+              window.renderGrid(a, b, area);
+            }
           }
 
           const longExpanded = document.getElementById('exampleLongExpanded');
           if (longExpanded) {
-            longExpanded.innerHTML = `
+            // Use the shared formatter for correct alignment
+            import('/src/longMultFormat.ts').then(
+              ({ renderExpandedLongMultiplication }) => {
+                longExpanded.innerHTML = `
 <h3>Expanded form (4 terms)</h3>
-<pre>
-   27
- × 65
- ----
-    35  ← 5 × 7
-   100  ← 5 × 20
-   420  ← 60 × 7
-  1200  ← 60 × 20
- ----
-  1755
-</pre>
+<pre>${renderExpandedLongMultiplication(a, b)}</pre>
 `;
+              }
+            );
           }
 
           const longTraditional = document.getElementById(
             'exampleLongTraditional'
           );
           if (longTraditional) {
-            longTraditional.innerHTML = `
+            import('/src/longMultFormat.ts').then(
+              ({ renderTraditionalLongMultiplication }) => {
+                longTraditional.innerHTML = `
 <h3>Traditional form (2 partial products)</h3>
 <pre>
-   27
- × 65
- ----
-   135  ← 27×5 (ones)
-  1620  ← 27×6 (tens, shifted left)
- ----
-  1755
+${renderTraditionalLongMultiplication(a, b)}
 </pre>
 `;
+              }
+            );
           }
-        } else {
-          debug.textContent += ' – window.renderGrid not defined';
         }
+
+        aInput.addEventListener('input', renderExamples);
+        bInput.addEventListener('input', renderExamples);
+
+        // initial render
+        renderExamples();
       </script>
 
       <p>
