@@ -149,8 +149,7 @@ main {
 
 .top-label,
 .left-label {
-  /* slightly brighter so you can see which row/column are the inputs */
-  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
 }
 
 /* highlights for partial products on the explanation page */
@@ -166,8 +165,7 @@ main {
 
 /* helper class applied to the input row/column cells */
 .input-cell {
-  /* background only – no border so the whole grid stays clean */
-  background: rgba(255, 255, 255, 0.25);
+  background: transparent;
 }
 
 .product-cell {
