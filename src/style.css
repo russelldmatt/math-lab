@@ -55,77 +55,70 @@ main {
 }
 
 .area-model-wrapper {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto;
-  column-gap: 10px;
-  row-gap: 8px;
-  align-items: stretch;
-  justify-content: start;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
 }
 
 .area-model-caption {
-  grid-column: 1 / -1;
-  grid-row: 1;
   font-weight: 700;
   color: #e2e8f0;
   margin-bottom: 2px;
 }
 
-.axis-top {
-  grid-column: 2;
-  grid-row: 2;
+.mid-top-label-cell,
+.mid-left-label-cell {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-self: stretch;
+  justify-self: stretch;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: end;
-  gap: 6px;
+  justify-content: center;
 }
 
-.axis-top-text,
-.axis-left-text {
-  font-weight: 700;
-  color: #e2e8f0;
-  letter-spacing: 0.2px;
+.mid-label-pill {
+  font-weight: 800;
+  color: #f8fafc;
   line-height: 1;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.75);
+  border-radius: 999px;
+  padding: 3px 8px;
+  z-index: 1;
 }
 
-.axis-top-bracket {
-  width: calc(100% - var(--axis-top-inset-left, 0px));
-  height: 8px;
+.mid-top-label-cell::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 50%;
+  height: 10px;
+  transform: translateY(-15%);
   border-top: 2px solid #94a3b8;
   border-left: 2px solid #94a3b8;
   border-right: 2px solid #94a3b8;
   border-radius: 6px 6px 0 0;
   box-sizing: border-box;
-  margin-top: 2px;
-  margin-left: var(--axis-top-inset-left, 0px);
 }
 
-.axis-left {
-  grid-column: 1;
-  grid-row: 3;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-.axis-left-bracket {
-  align-self: stretch;
+.mid-left-label-cell::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 50%;
   width: 10px;
-  height: calc(100% - var(--axis-left-inset-top, 0px));
+  transform: translateX(-40%);
   border-left: 2px solid #94a3b8;
   border-top: 2px solid #94a3b8;
   border-bottom: 2px solid #94a3b8;
   border-radius: 6px 0 0 6px;
   box-sizing: border-box;
-  margin-top: var(--axis-left-inset-top, 0px);
-}
-
-.mult-grid {
-  grid-column: 2;
-  grid-row: 3;
 }
 
 /* multiplication grid layout */
