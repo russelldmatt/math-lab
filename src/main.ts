@@ -57,24 +57,6 @@ function makeHundredBlock(): HTMLElement {
   return hundred;
 }
 
-function renderGroupBlocks(group: Group, isVertical: boolean): HTMLElement {
-  const container = document.createElement('div');
-  container.className = `group-blocks ${
-    isVertical ? 'vertical' : 'horizontal'
-  }`;
-
-  for (let i = 0; i < group.count; i++) {
-    if (group.type === 'tens') {
-      container.appendChild(
-        isVertical ? makeVerticalTenBlock() : makeHorizontalTenBlock()
-      );
-    } else {
-      container.appendChild(makeOneBlock());
-    }
-  }
-  return container;
-}
-
 function renderProductCell(aGroup: Group, bGroup: Group): HTMLElement {
   const cell = document.createElement('div');
   cell.className = 'product-cell';
@@ -108,7 +90,7 @@ export function renderGrid(
   a: number,
   b: number,
   target: HTMLElement,
-  options: RenderGridOptions = {}
+  options: RenderGridOptions = {},
 ): void {
   const aGroups = decompose(a);
   const bGroups = decompose(b);
