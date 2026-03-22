@@ -1,9 +1,5 @@
 import './style.css';
 
-const viz = document.getElementById('viz')!;
-const aInput = document.getElementById('aInput') as HTMLInputElement;
-const bInput = document.getElementById('bInput') as HTMLInputElement;
-
 interface Group {
   type: 'ones' | 'tens';
   count: number;
@@ -214,12 +210,6 @@ export function renderGrid(
   target.appendChild(wrapper);
 }
 
-function init() {
-  const a = parseInt(aInput.value) || 0;
-  const b = parseInt(bInput.value) || 0;
-  renderGrid(a, b, viz);
-}
-
 // expose to global so non-module pages can use it
 declare global {
   interface Window {
@@ -229,13 +219,21 @@ declare global {
 
 window.renderGrid = renderGrid;
 
-// wire up inputs
-function scheduleRender() {
-  // debounce? simple immediate
+// Only run page-specific init if the #viz element exists (i.e. we're on index.html)
+const viz = document.getElementById('viz');
+const aInput = document.getElementById('aInput') as HTMLInputElement | null;
+const bInput = document.getElementById('bInput') as HTMLInputElement | null;
+
+if (viz && aInput && bInput) {
+  function init() {
+    const a = parseInt(aInput!.value) || 0;
+    const b = parseInt(bInput!.value) || 0;
+    renderGrid(a, b, viz!);
+  }
+
+  aInput.addEventListener('input', init);
+  bInput.addEventListener('input', init);
+
+  // initial render
   init();
 }
-aInput.addEventListener('input', scheduleRender);
-bInput.addEventListener('input', scheduleRender);
-
-// initial render
-init();
