@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,8 +9,8 @@
   <body>
     <header>
       <nav>
-        <a href="/">Blocks</a> |
-        <a href="/hand.html">Long Multiplication</a>
+        <a href="/">Blocks</a> | <a href="/hand.html">Long Multiplication</a> |
+        <a href="/comparing-sums.html">Comparing Sums</a>
       </nav>
       <h1>Long multiplication (standard algorithm)</h1>
     </header>
@@ -78,7 +78,7 @@
               String(p4).length,
               String(total).length,
               String(partial1).length,
-              String(partial2).length
+              String(partial2).length,
             ) + 1;
 
           if (window.renderGrid) {
@@ -97,12 +97,12 @@
 <h3>Expanded form (4 terms)</h3>
 <pre>${renderExpandedLongMultiplication(a, b)}</pre>
 `;
-              }
+              },
             );
           }
 
           const longTraditional = document.getElementById(
-            'exampleLongTraditional'
+            'exampleLongTraditional',
           );
           if (longTraditional) {
             import('/src/longMultFormat.ts').then(
@@ -113,7 +113,7 @@
 ${renderTraditionalLongMultiplication(a, b)}
 </pre>
 `;
-              }
+              },
             );
           }
         }

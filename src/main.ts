@@ -14,13 +14,13 @@ function decompose(n: number): Group[] {
   return groups;
 }
 
-function makeOneBlock(): HTMLElement {
+export function makeOneBlock(): HTMLElement {
   const block = document.createElement('div');
   block.className = 'one-block';
   return block;
 }
 
-function makeHorizontalTenBlock(): HTMLElement {
+export function makeHorizontalTenBlock(): HTMLElement {
   const ten = document.createElement('div');
   ten.className = 'ten-block';
   for (let i = 0; i < 10; i++) {
@@ -31,7 +31,7 @@ function makeHorizontalTenBlock(): HTMLElement {
   return ten;
 }
 
-function makeVerticalTenBlock(): HTMLElement {
+export function makeVerticalTenBlock(): HTMLElement {
   const ten = document.createElement('div');
   ten.className = 'ten-block-vertical';
   for (let i = 0; i < 10; i++) {
@@ -42,7 +42,7 @@ function makeVerticalTenBlock(): HTMLElement {
   return ten;
 }
 
-function makeHundredBlock(): HTMLElement {
+export function makeHundredBlock(): HTMLElement {
   const hundred = document.createElement('div');
   hundred.className = 'hundred-block';
   for (let i = 0; i < 100; i++) {

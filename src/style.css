@@ -302,3 +302,169 @@ main {
     min-width: 60px;
   }
 }
+
+/* ── Comparing Sums page ─────────────────────────────────────── */
+
+.controls-sep {
+  color: #94a3b8;
+  font-size: 14px;
+  align-self: center;
+}
+
+.comparing-layout {
+  display: grid;
+  /* col 1 = left sum | col 2 = eq indicator | col 3 = right sum */
+  grid-template-columns: min-content min-content min-content;
+  grid-template-rows: auto auto;
+  column-gap: 48px;
+  row-gap: 12px;
+  margin-top: 8px;
+}
+
+.sum-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.sum-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.addend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.addend-label {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  min-width: 2ch;
+  text-align: center;
+}
+
+/* stacks ten-blocks (rows) then ones in a row */
+.number-viz {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.number-viz-ones {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.sum-plus {
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: #94a3b8;
+  padding-top: 8px;
+}
+
+.move-btn-row {
+  display: flex;
+  gap: 10px;
+  justify-self: center;
+}
+
+.move-btn {
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background 0.12s,
+    border-color 0.12s;
+}
+
+.move-btn:hover:not(:disabled) {
+  background: #334155;
+  border-color: #64748b;
+}
+
+.move-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.eq-indicator {
+  font-size: 3.5rem;
+  font-weight: 800;
+  min-width: 2ch;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+}
+
+.eq-equal {
+  color: #22c55e;
+}
+
+.eq-not-equal {
+  color: #f43f5e;
+}
+
+/* ── Question + answer buttons ───────────────────────────────────────── */
+
+.question-section {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 14px 0;
+}
+
+.answer-btn-row {
+  display: flex;
+  gap: 14px;
+}
+
+.answer-btn {
+  padding: 10px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: 2px solid #475569;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.12s,
+    border-color 0.12s;
+}
+
+.answer-btn:hover {
+  background: #334155;
+  border-color: #64748b;
+}
+
+.answer-correct {
+  background: #14532d !important;
+  border-color: #22c55e !important;
+  color: #bbf7d0 !important;
+}
+
+.answer-wrong {
+  background: #4c0519 !important;
+  border-color: #f43f5e !important;
+  color: #fecdd3 !important;
+}

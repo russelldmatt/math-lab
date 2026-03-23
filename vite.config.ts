@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         hand: resolve(__dirname, 'hand.html'),
+        comparingSums: resolve(__dirname, 'comparing-sums.html'),
       },
     },
   },
