@@ -26,15 +26,17 @@ describe('renderExpandedLongMultiplication', () => {
     expect(bottomLine.includes('×')).toBe(true);
     // Check the entire output string
     expect(result).toBe(
-      '   27\n' +
-        '×  65\n' +
-        '-----\n' +
-        '   35  ← 5 × 7\n' +
-        '  100  ← 5 × 20\n' +
-        '  420  ← 60 × 7\n' +
-        ' 1200  ← 60 × 20\n' +
-        '-----\n' +
-        ' 1755'
+      [
+        '   27',
+        '×  65',
+        '-----',
+        '   35  ← 5 × 7',
+        '  100  ← 5 × 20',
+        '  420  ← 60 × 7',
+        ' 1200  ← 60 × 20',
+        '-----',
+        ' 1755',
+      ].join('\n'),
     );
   });
 
@@ -42,13 +44,15 @@ describe('renderExpandedLongMultiplication', () => {
     const result = renderExpandedLongMultiplication(7, 27);
     console.log('\nExpanded form output (7 x 27):\n' + result + '\n');
     expect(result).toBe(
-      '   7\n' +
-        '× 27\n' +
-        '----\n' +
-        '  49  ← 7 × 7\n' +
-        ' 140  ← 20 × 7\n' +
-        '----\n' +
-        ' 189'
+      [
+        '   7',
+        '× 27',
+        '----',
+        '  49  ← 7 × 7',
+        ' 140  ← 20 × 7',
+        '----',
+        ' 189',
+      ].join('\n'),
     );
   });
 
@@ -56,7 +60,7 @@ describe('renderExpandedLongMultiplication', () => {
     const result = renderExpandedLongMultiplication(7, 6);
     console.log('\nExpanded form output (7 x 6):\n' + result + '\n');
     expect(result).toBe(
-      '  7\n' + '× 6\n' + '---\n' + ' 42  ← 6 × 7\n' + '---\n' + ' 42'
+      ['  7', '× 6', '---', ' 42  ← 6 × 7', '---', ' 42'].join('\n'),
     );
   });
 
@@ -64,7 +68,7 @@ describe('renderExpandedLongMultiplication', () => {
     const result = renderExpandedLongMultiplication(5, 8);
     console.log('\nExpanded form output (5 x 8):\n' + result + '\n');
     expect(result).toBe(
-      '  5\n' + '× 8\n' + '---\n' + ' 40  ← 8 × 5\n' + '---\n' + ' 40'
+      ['  5', '× 8', '---', ' 40  ← 8 × 5', '---', ' 40'].join('\n'),
     );
   });
 });
@@ -75,13 +79,15 @@ describe('renderTraditionalLongMultiplication', () => {
     // Print the full output for visual inspection
     console.log('\nTraditional form output:\n' + result + '\n');
     expect(result).toBe(
-      '   27\n' +
-        '×  65\n' +
-        '-----\n' +
-        '  135  ← 27 × 5 (ones)\n' +
-        ' 1620  ← 27 × 60 (tens, shifted)\n' +
-        '-----\n' +
-        ' 1755'
+      [
+        '   27',
+        '×  65',
+        '-----',
+        '  135  ← 27 × 5 (ones)',
+        ' 1620  ← 27 × 60 (tens, shifted)',
+        '-----',
+        ' 1755',
+      ].join('\n'),
     );
   });
 
@@ -89,13 +95,15 @@ describe('renderTraditionalLongMultiplication', () => {
     const result = renderTraditionalLongMultiplication(7, 27);
     console.log('\nTraditional form output (7 x 27):\n' + result + '\n');
     expect(result).toBe(
-      '   7\n' +
-        '× 27\n' +
-        '----\n' +
-        '  49  ← 7 × 7 (ones)\n' +
-        ' 140  ← 7 × 20 (tens, shifted)\n' +
-        '----\n' +
-        ' 189'
+      [
+        '   7',
+        '× 27',
+        '----',
+        '  49  ← 7 × 7 (ones)',
+        ' 140  ← 7 × 20 (tens, shifted)',
+        '----',
+        ' 189',
+      ].join('\n'),
     );
   });
 
@@ -103,13 +111,15 @@ describe('renderTraditionalLongMultiplication', () => {
     const result = renderTraditionalLongMultiplication(7, 6);
     console.log('\nTraditional form output (7 x 6):\n' + result + '\n');
     expect(result).toBe(
-      '  7\n' +
-        '× 6\n' +
-        '---\n' +
-        ' 42  ← 7 × 6 (ones)\n' +
-        '  0  ← 7 × 0 (tens, shifted)\n' +
-        '---\n' +
-        ' 42'
+      [
+        '  7',
+        '× 6',
+        '---',
+        ' 42  ← 7 × 6 (ones)',
+        '  0  ← 7 × 0 (tens, shifted)',
+        '---',
+        ' 42',
+      ].join('\n'),
     );
   });
 });
