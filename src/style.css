@@ -355,6 +355,7 @@ main {
   min-width: 2ch;
   text-align: center;
   justify-self: center;
+  align-self: center;
 }
 
 .addend-blocks {
