@@ -502,3 +502,57 @@ main {
   border-color: #f43f5e !important;
   color: #fecdd3 !important;
 }
+
+.game-start-btn {
+  background: #1e3a5f;
+  border-color: #3b82f6;
+  color: #bfdbfe;
+}
+
+.game-start-btn:hover:not(:disabled) {
+  background: #1e40af;
+  border-color: #60a5fa;
+}
+
+/* ── Game scoreboard ───────────────────────────────────────── */
+
+.score-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.game-timer {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #facc15;
+  letter-spacing: 0.03em;
+}
+
+.score-display {
+  display: flex;
+  gap: 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.score-correct {
+  color: #22c55e;
+}
+
+.score-incorrect {
+  color: #f43f5e;
+}
+
+.score-total {
+  color: #e2e8f0;
+}
+
+.game-over {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  text-align: center;
+}

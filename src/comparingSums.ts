@@ -58,6 +58,25 @@ function playFailure(): void {
   osc.stop(ctx.currentTime + 0.5);
 }
 
+function playTimeUp(): void {
+  const ctx = new AudioContext();
+  // Descending minor phrase: E4 D4 C4
+  const notes = [329.63, 293.66, 261.63];
+  notes.forEach((freq, i) => {
+    const t = ctx.currentTime + i * 0.22;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.3, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
+    osc.start(t);
+    osc.stop(t + 0.45);
+  });
+}
+
 // ── DOM refs ─────────────────────────────────────────────────────────────
 
 const aInput = document.getElementById('aInput') as HTMLInputElement;
@@ -181,6 +200,84 @@ btnNo.textContent = 'No';
 answerRow.appendChild(btnYes);
 answerRow.appendChild(btnNo);
 
+// ── Scoreboard ────────────────────────────────────────────────────────────
+
+const scoreSection = document.createElement('div');
+scoreSection.className = 'score-section';
+scoreSection.style.gridColumn = '1 / -1';
+scoreSection.style.gridRow = '4';
+layout.appendChild(scoreSection);
+
+const timerEl = document.createElement('div');
+timerEl.className = 'game-timer';
+timerEl.hidden = true;
+scoreSection.appendChild(timerEl);
+
+const scoreEl = document.createElement('div');
+scoreEl.className = 'score-display';
+scoreEl.hidden = true;
+scoreSection.appendChild(scoreEl);
+
+const gameOverEl = document.createElement('div');
+gameOverEl.className = 'game-over';
+gameOverEl.hidden = true;
+scoreSection.appendChild(gameOverEl);
+
+// ── Game state ────────────────────────────────────────────────────────────
+
+let correct = 0;
+let incorrect = 0;
+let gameActive = false;
+let timerInterval: ReturnType<typeof setInterval> | null = null;
+
+function updateScoreDisplay(): void {
+  const total = correct - incorrect;
+  scoreEl.innerHTML =
+    `<span class="score-correct">✓ ${correct}</span>` +
+    `<span class="score-incorrect">✗ ${incorrect}</span>` +
+    `<span class="score-total">Score: ${total >= 0 ? '+' : ''}${total}</span>`;
+}
+
+function endGame(): void {
+  gameActive = false;
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  playTimeUp();
+  timerEl.hidden = true;
+  btnYes.disabled = true;
+  btnNo.disabled = true;
+  const total = correct - incorrect;
+  gameOverEl.textContent = `Time's up! Final score: ${total >= 0 ? '+' : ''}${total} (${correct} correct, ${incorrect} incorrect)`;
+  gameOverEl.hidden = false;
+  startGameBtn.textContent = '↺ Play again';
+  startGameBtn.disabled = false;
+}
+
+function startGame(): void {
+  correct = 0;
+  incorrect = 0;
+  gameActive = true;
+  gameOverEl.hidden = true;
+  scoreEl.hidden = false;
+  timerEl.hidden = false;
+  btnYes.disabled = false;
+  btnNo.disabled = false;
+  startGameBtn.disabled = true;
+  updateScoreDisplay();
+  generateProblem();
+
+  let remaining = 30;
+  timerEl.textContent = `⏱ ${remaining}s`;
+
+  timerInterval = setInterval(() => {
+    remaining -= 1;
+    timerEl.textContent = `⏱ ${remaining}s`;
+    if (remaining <= 0) endGame();
+  }, 1000);
+}
+
 function resetAnswerButtons(): void {
   btnYes.className = 'answer-btn';
   btnNo.className = 'answer-btn';
@@ -192,15 +289,30 @@ function handleAnswer(answeredYes: boolean): void {
   const c = parseInt(cInput.value) || 0;
   const d = parseInt(dInput.value) || 0;
   const equal = a + b === c + d;
-  const correct = answeredYes === equal;
+  const isCorrect = answeredYes === equal;
 
   resetAnswerButtons();
-  if (correct) {
+  if (isCorrect) {
     (answeredYes ? btnYes : btnNo).className = 'answer-btn answer-correct';
     playSuccess();
   } else {
     (answeredYes ? btnYes : btnNo).className = 'answer-btn answer-wrong';
     playFailure();
+  }
+
+  if (gameActive) {
+    if (isCorrect) correct++;
+    else incorrect++;
+    updateScoreDisplay();
+    // brief pause so the colour shows, then auto-advance
+    btnYes.disabled = true;
+    btnNo.disabled = true;
+    setTimeout(() => {
+      if (!gameActive) return;
+      generateProblem();
+      btnYes.disabled = false;
+      btnNo.disabled = false;
+    }, 600);
   }
 }
 
@@ -261,6 +373,11 @@ function generateProblem(): void {
 
 const generateBtn = document.getElementById('generateBtn') as HTMLButtonElement;
 generateBtn.addEventListener('click', generateProblem);
+
+const startGameBtn = document.getElementById(
+  'startGameBtn',
+) as HTMLButtonElement;
+startGameBtn.addEventListener('click', startGame);
 
 // ── Refresh ──────────────────────────────────────────────────────────────
 
