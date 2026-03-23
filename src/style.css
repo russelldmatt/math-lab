@@ -311,6 +311,26 @@ main {
   align-self: center;
 }
 
+.generate-btn {
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: center;
+  transition:
+    background 0.12s,
+    border-color 0.12s;
+}
+
+.generate-btn:hover {
+  background: #334155;
+  border-color: #64748b;
+}
+
 .comparing-layout {
   display: grid;
   /* col 1 = left sum | col 2 = eq indicator | col 3 = right sum */
@@ -401,12 +421,26 @@ main {
 }
 
 .eq-indicator {
-  font-size: 3.5rem;
-  font-weight: 800;
-  min-width: 2ch;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   align-self: center;
   justify-self: center;
+  line-height: 1;
+  gap: 2px;
+}
+
+.eq-question {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.eq-sign {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #f1f5f9;
 }
 
 .eq-equal {

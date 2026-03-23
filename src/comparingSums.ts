@@ -123,6 +123,8 @@ const eqIndicator = document.createElement('div');
 eqIndicator.className = 'eq-indicator';
 eqIndicator.style.gridColumn = '2';
 eqIndicator.style.gridRow = '1 / 3';
+eqIndicator.innerHTML =
+  '<span class="eq-question">?</span><span class="eq-sign">=</span>';
 layout.appendChild(eqIndicator);
 
 // Left sum row — row 2, col 1
@@ -205,6 +207,61 @@ function handleAnswer(answeredYes: boolean): void {
 btnYes.addEventListener('click', () => handleAnswer(true));
 btnNo.addEventListener('click', () => handleAnswer(false));
 
+// ── Problem generation ───────────────────────────────────────────────────
+
+function randInt(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function clamp(n: number, min: number, max: number): number {
+  return Math.max(min, Math.min(max, n));
+}
+
+function generateProblem(): void {
+  const equal = Math.random() < 0.5;
+  const offset = randInt(-5, 5); // C = A + offset
+
+  const a = randInt(10, 99);
+  const c = clamp(a + offset, 10, 99);
+  // actual offset after clamping
+  const actualOffset = c - a;
+
+  let b: number;
+  let d: number;
+
+  if (equal) {
+    // D = B - actualOffset; need D in [10,99]
+    const bMin = clamp(10 + actualOffset, 10, 99);
+    const bMax = clamp(99 + actualOffset, 10, 99);
+    b = randInt(bMin, bMax);
+    d = b - actualOffset; // guaranteed in [10,99]
+  } else {
+    // Pick B freely, D = clamp(B + offsetBD) with a different offset
+    // Keep trying until sums differ
+    let attempts = 0;
+    do {
+      b = randInt(10, 99);
+      const offsetBD = randInt(-5, 5);
+      d = clamp(b + offsetBD, 10, 99);
+      attempts++;
+    } while (a + b === c + d && attempts < 20);
+
+    // Last-resort nudge if still equal
+    if (a + b === c + d) {
+      d = d < 99 ? d + 1 : d - 1;
+    }
+  }
+
+  aInput.value = String(a);
+  bInput.value = String(b);
+  cInput.value = String(c);
+  dInput.value = String(d);
+  refresh();
+}
+
+const generateBtn = document.getElementById('generateBtn') as HTMLButtonElement;
+generateBtn.addEventListener('click', generateProblem);
+
 // ── Refresh ──────────────────────────────────────────────────────────────
 
 function refresh(): void {
@@ -222,10 +279,6 @@ function refresh(): void {
   addendC.blocksEl.replaceChildren(renderNumberBlocks(c));
   addendD.labelEl.textContent = String(d);
   addendD.blocksEl.replaceChildren(renderNumberBlocks(d));
-
-  const equal = a + b === c + d;
-  eqIndicator.textContent = equal ? '=' : '≠';
-  eqIndicator.className = `eq-indicator ${equal ? 'eq-equal' : 'eq-not-equal'}`;
 
   btnMoveLeft.disabled = d <= 0;
   btnMoveRight.disabled = c <= 0;
