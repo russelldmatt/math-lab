@@ -43,19 +43,14 @@ layout.className = 'comparing-layout';
 mainEl.appendChild(layout);
 
 function makeAddendEl(): {
-  wrap: HTMLElement;
   labelEl: HTMLElement;
   blocksEl: HTMLElement;
 } {
-  const wrap = document.createElement('div');
-  wrap.className = 'addend';
   const labelEl = document.createElement('div');
   labelEl.className = 'addend-label';
   const blocksEl = document.createElement('div');
   blocksEl.className = 'addend-blocks';
-  wrap.appendChild(labelEl);
-  wrap.appendChild(blocksEl);
-  return { wrap, labelEl, blocksEl };
+  return { labelEl, blocksEl };
 }
 
 function makePlusEl(): HTMLElement {
@@ -65,10 +60,21 @@ function makePlusEl(): HTMLElement {
   return el;
 }
 
-// Move buttons — row 1, col 3
+// Grid layout: 7 cols — A(1) | +(2) | B(3) | ?/=(4) | C(5) | +(6) | D(7)
+// Row 1: move buttons span cols 5-7
+// Row 2: number labels + operators
+// Row 3: base-10 blocks (same columns as their labels)
+
+function placeAt(el: HTMLElement, col: string, row: string): HTMLElement {
+  el.style.gridColumn = col;
+  el.style.gridRow = row;
+  return el;
+}
+
+// Move buttons — row 1, cols 5–7
 const btnRow = document.createElement('div');
 btnRow.className = 'move-btn-row';
-btnRow.style.gridColumn = '3';
+btnRow.style.gridColumn = '5 / 8';
 btnRow.style.gridRow = '1';
 
 const btnMoveLeft = document.createElement('button');
@@ -85,47 +91,41 @@ btnRow.appendChild(btnMoveLeft);
 btnRow.appendChild(btnMoveRight);
 layout.appendChild(btnRow);
 
-// Equality indicator — col 2, spans both rows
+// ?/= indicator — row 2, col 4; ? is absolutely positioned so = stays centered
 const eqIndicator = document.createElement('div');
 eqIndicator.className = 'eq-indicator';
-eqIndicator.style.gridColumn = '2';
-eqIndicator.style.gridRow = '1 / 3';
-eqIndicator.innerHTML =
-  '<span class="eq-question">?</span><span class="eq-sign">=</span>';
+eqIndicator.style.gridColumn = '4';
+eqIndicator.style.gridRow = '2';
+eqIndicator.innerHTML = '<span class="eq-question">?</span><span class="eq-sign">=</span>';
 layout.appendChild(eqIndicator);
-
-// Left sum row — row 2, col 1
-const leftRow = document.createElement('div');
-leftRow.className = 'sum-row';
-leftRow.style.gridColumn = '1';
-leftRow.style.gridRow = '2';
 
 const addendA = makeAddendEl();
 const addendB = makeAddendEl();
-leftRow.appendChild(addendA.wrap);
-leftRow.appendChild(makePlusEl());
-leftRow.appendChild(addendB.wrap);
-layout.appendChild(leftRow);
-
-// Right sum row — row 2, col 3
-const rightRow = document.createElement('div');
-rightRow.className = 'sum-row';
-rightRow.style.gridColumn = '3';
-rightRow.style.gridRow = '2';
-
 const addendC = makeAddendEl();
 const addendD = makeAddendEl();
-rightRow.appendChild(addendC.wrap);
-rightRow.appendChild(makePlusEl());
-rightRow.appendChild(addendD.wrap);
-layout.appendChild(rightRow);
+
+// Row 2: labels — each addend gets its own column
+const plusLeft = makePlusEl();
+const plusRight = makePlusEl();
+layout.appendChild(placeAt(addendA.labelEl, '1', '2'));
+layout.appendChild(placeAt(plusLeft,         '2', '2'));
+layout.appendChild(placeAt(addendB.labelEl, '3', '2'));
+layout.appendChild(placeAt(addendC.labelEl, '5', '2'));
+layout.appendChild(placeAt(plusRight,        '6', '2'));
+layout.appendChild(placeAt(addendD.labelEl, '7', '2'));
+
+// Row 3: blocks — same column as their label, so they align vertically
+layout.appendChild(placeAt(addendA.blocksEl, '1', '3'));
+layout.appendChild(placeAt(addendB.blocksEl, '3', '3'));
+layout.appendChild(placeAt(addendC.blocksEl, '5', '3'));
+layout.appendChild(placeAt(addendD.blocksEl, '7', '3'));
 
 // ── Question section ─────────────────────────────────────────────────────
 
 const questionSection = document.createElement('div');
 questionSection.className = 'question-section';
 questionSection.style.gridColumn = '1 / -1';
-questionSection.style.gridRow = '3';
+  questionSection.style.gridRow = '4';
 layout.appendChild(questionSection);
 
 const questionText = document.createElement('p');
@@ -153,7 +153,7 @@ answerRow.appendChild(btnNo);
 const scoreSection = document.createElement('div');
 scoreSection.className = 'score-section';
 scoreSection.style.gridColumn = '1 / -1';
-scoreSection.style.gridRow = '4';
+  scoreSection.style.gridRow = '5';
 layout.appendChild(scoreSection);
 
 const timerEl = document.createElement('div');

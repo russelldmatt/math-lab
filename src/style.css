@@ -333,10 +333,10 @@ main {
 
 .comparing-layout {
   display: grid;
-  /* col 1 = left sum | col 2 = eq indicator | col 3 = right sum */
-  grid-template-columns: min-content min-content min-content;
-  grid-template-rows: auto auto;
-  column-gap: 48px;
+  /* A | + | B | ?/= | C | + | D */
+  grid-template-columns: repeat(7, min-content);
+  grid-template-rows: auto auto auto;
+  column-gap: 20px;
   row-gap: 12px;
   margin-top: 8px;
 }
@@ -348,25 +348,17 @@ main {
   gap: 14px;
 }
 
-.sum-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.addend {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
 .addend-label {
   font-size: 2.2rem;
   font-weight: 800;
   color: #f1f5f9;
   min-width: 2ch;
   text-align: center;
+  justify-self: center;
+}
+
+.addend-blocks {
+  justify-self: center;
 }
 
 /* stacks ten-blocks (rows) then ones in a row */
@@ -387,7 +379,7 @@ main {
   font-size: 2.2rem;
   font-weight: 300;
   color: #94a3b8;
-  padding-top: 8px;
+  align-self: center;
 }
 
 .move-btn-row {
@@ -421,17 +413,20 @@ main {
 }
 
 .eq-indicator {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   align-self: center;
   justify-self: center;
-  line-height: 1;
-  gap: 2px;
 }
 
 .eq-question {
+  position: absolute;
+  bottom: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 2px;
   font-size: 1.4rem;
   font-weight: 700;
   color: #94a3b8;
