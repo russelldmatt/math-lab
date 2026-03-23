@@ -1,4 +1,5 @@
-import { makeOneBlock, makeHorizontalTenBlock } from './main';
+import './style.css';
+import { makeOneBlock, makeHorizontalTenBlock } from './blocks';
 
 function renderNumberBlocks(n: number): HTMLElement {
   const wrapper = document.createElement('div');

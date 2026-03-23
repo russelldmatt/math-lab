@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Long Multiplication</title>
-    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
     <header>
@@ -24,106 +23,16 @@
       </label>
     </section>
     <main>
-      <h2>Area‑model example</h2>
+      <h2>Area&#8209;model example</h2>
       <div id="exampleArea" class="viz"></div>
 
-      <h2>Long‑multiplication layout</h2>
+      <h2>Long&#8209;multiplication layout</h2>
       <div class="long-mult">
         <div class="long-mult-expanded" id="exampleLongExpanded"></div>
         <div class="long-mult-traditional" id="exampleLongTraditional"></div>
       </div>
-
-      <script type="module" src="/src/main.ts"></script>
-
-      <script type="module">
-        const aInput = document.getElementById('aInput');
-        const bInput = document.getElementById('bInput');
-        const debug = document.createElement('div');
-        debug.id = 'debug';
-        document.body.appendChild(debug);
-
-        function padNum(n, width = 4) {
-          return String(n).padStart(width, ' ');
-        }
-
-        function renderExamples() {
-          const a = parseInt(aInput.value) || 0;
-          const b = parseInt(bInput.value) || 0;
-
-          // decompose into tens and ones
-          const aTens = Math.floor(a / 10);
-          const aOnes = a % 10;
-          const bTens = Math.floor(b / 10);
-          const bOnes = b % 10;
-
-          // the 4 products
-          const p1 = aOnes * bOnes; // ones × ones
-          const p2 = aOnes * (bTens * 10); // ones × tens
-          const p3 = aTens * 10 * bOnes; // tens × ones
-          const p4 = aTens * 10 * (bTens * 10); // tens × tens
-          const total = a * b;
-
-          // partial products the traditional way
-          const partial1 = a * bOnes; // multiply by ones
-          const partial2 = a * (bTens * 10); // multiply by tens
-
-          // figure out the width we need for alignment based on the actual numbers
-          const maxWidth =
-            Math.max(
-              String(a).length,
-              String(b).length,
-              String(p1).length,
-              String(p2).length,
-              String(p3).length,
-              String(p4).length,
-              String(total).length,
-              String(partial1).length,
-              String(partial2).length,
-            ) + 1;
-
-          if (window.renderGrid) {
-            const area = document.getElementById('exampleArea');
-            if (area) {
-              window.renderGrid(a, b, area);
-            }
-          }
-
-          const longExpanded = document.getElementById('exampleLongExpanded');
-          if (longExpanded) {
-            // Use the shared formatter for correct alignment
-            import('/src/longMultFormat.ts').then(
-              ({ renderExpandedLongMultiplication }) => {
-                longExpanded.innerHTML = `
-<h3>Expanded form (4 terms)</h3>
-<pre>${renderExpandedLongMultiplication(a, b)}</pre>
-`;
-              },
-            );
-          }
-
-          const longTraditional = document.getElementById(
-            'exampleLongTraditional',
-          );
-          if (longTraditional) {
-            import('/src/longMultFormat.ts').then(
-              ({ renderTraditionalLongMultiplication }) => {
-                longTraditional.innerHTML = `
-<h3>Traditional form (2 partial products)</h3>
-<pre>
-${renderTraditionalLongMultiplication(a, b)}
-</pre>
-`;
-              },
-            );
-          }
-        }
-
-        aInput.addEventListener('input', renderExamples);
-        bInput.addEventListener('input', renderExamples);
-
-        // initial render
-        renderExamples();
-      </script>
     </main>
+
+    <script type="module" src="/src/hand.ts"></script>
   </body>
 </html>
